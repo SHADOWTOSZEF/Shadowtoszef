@@ -3,182 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puls Historii: Encyklopedia Polskiego Rapu</title>
+    <title>RAP GENESIS | KACPER.B & JAKUB.C</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
-
+        
         :root {
-            --accent-color: #e74c3c;
-            --bg-dark: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-gray: #bdc3c7;
+            --fire: linear-gradient(90deg, #ffcc00, #ff4500, #ff0000);
+            --bg: #050505;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background: var(--bg);
+            color: #fff;
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            scroll-behavior: smooth;
         }
 
-        /* --- HERO SECTION --- */
         header {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1544923246-77307dd654ca?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-bottom: 5px solid var(--accent-color);
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=2070');
+            background-size: cover;
+            border-bottom: 5px solid #ff4500;
         }
 
         h1 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: clamp(4rem, 10vw, 8rem);
-            margin: 0;
-            letter-spacing: 4px;
-            color: var(--accent-color);
-            text-shadow: 0 0 30px rgba(231, 76, 60, 0.4);
-        }
-
-        .scroll-btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            border: 2px solid var(--accent-color);
-            color: white;
-            text-decoration: none;
             font-family: 'Bebas Neue';
-            font-size: 1.5rem;
-            transition: 0.3s;
-            cursor: pointer;
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin: 0;
+            background: var(--fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .scroll-btn:hover {
-            background: var(--accent-color);
-        }
-
-        /* --- HISTORIA & FILARY --- */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
 
-        .section-title {
-            font-family: 'Bebas Neue';
-            font-size: 3.5rem;
-            color: var(--accent-color);
-            text-align: center;
+        .history-box {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 15px;
             margin-bottom: 50px;
+            border-left: 6px solid #ff4500;
         }
 
-        .history-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 100px;
+        .history-box h2 {
+            font-family: 'Bebas Neue';
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin: 0 0 15px 0;
         }
 
-        .history-text p {
+        .history-box p {
+            color: #ccc;
+            text-align: justify;
             font-size: 1.1rem;
-            color: var(--text-gray);
             margin-bottom: 20px;
         }
 
-        .filary {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 100px;
-            text-align: center;
-        }
-
-        .filar-card {
-            background: #111;
-            padding: 20px;
-            border-top: 3px solid var(--accent-color);
-        }
-
-        .filar-card h3 {
-            font-family: 'Bebas Neue';
-            margin: 10px 0;
-            font-size: 1.8rem;
-        }
-
-        /* --- PLAYLISTA --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 20px;
         }
 
         .card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
+            background: #111;
+            border: 1px solid #222;
+            padding: 25px;
+            border-radius: 12px;
             transition: 0.3s;
-            border-left: 4px solid transparent;
         }
 
         .card:hover {
-            transform: scale(1.02);
-            border-left-color: var(--accent-color);
-            background: #222;
-        }
-
-        .quote-box {
-            font-style: italic;
-            color: #888;
-            border-left: 2px solid var(--accent-color);
-            padding-left: 15px;
-            margin: 15px 0;
-        }
-
-        .tag {
-            background: var(--accent-color);
-            padding: 4px 12px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            border-color: #ff4500;
+            transform: translateY(-5px);
         }
 
         .btn {
             display: block;
-            text-align: center;
             margin-top: 15px;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
+            padding: 12px;
+            text-align: center;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-family: 'Bebas Neue';
+            font-size: 1.3rem;
+            color: #fff;
+            background: var(--fire);
+            border-radius: 5px;
         }
 
-        .btn:hover {
-            background: var(--accent-color);
-            color: white;
+        .tag {
+            color: #ffcc00;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        h2 {
+            margin: 10px 0;
+            font-family: 'Bebas Neue';
+            font-size: 1.8rem;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #777;
+            border-left: 3px solid #ff4500;
+            padding-left: 12px;
+            margin: 15px 0;
+            font-size: 0.95rem;
         }
 
         footer {
-            padding: 60px;
-            background: #000;
             text-align: center;
-            color: #444;
+            padding: 60px 20px;
+            background: #000;
+            border-top: 1px solid #222;
+            margin-top: 50px;
         }
 
-        @media (max-width: 768px) {
-            .history-grid, .filary { grid-template-columns: 1fr; }
-            h1 { font-size: 4rem; }
+        .authors {
+            font-family: 'Bebas Neue';
+            font-size: 2.5rem;
+            background: var(--fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -186,106 +145,71 @@
 
     <header>
         <h1>RAP GENESIS</h1>
-        <p style="font-size: 1.2rem; max-width: 600px; color: #ccc;">Od betonowych dżungli Nowego Jorku po polskie osiedla. Poznaj historię najpotężniejszego nurtu naszych czasów.</p>
-        <a href="#historia" class="scroll-btn">ZACZNIJ PODRÓŻ</a>
+        <p style="color:#ffcc00; font-family:'Bebas Neue'; letter-spacing:3px; margin-top: 10px;">HISTORIA I BRZMIENIE</p>
     </header>
 
-    <div class="container" id="historia">
-        
-        <div class="section-title">Narodziny Legendy</div>
-        
-        <div class="history-grid">
-            <div class="history-text">
-                <h3>Nowy Jork, Lata 70.</h3>
-                <p>Wszystko zaczęło się 11 sierpnia 1973 roku w Bronksie. DJ Kool Herc na jednej z imprez użył dwóch gramofonów, by zapętlić same bębny (breaki). Tłum oszalał, a ludzie zaczęli tańczyć w niespotykany dotąd sposób.</p>
-                <p>Z czasem DJ-om zaczęli towarzyszyć MC (Master of Ceremonies), którzy rymowali do bitu, by zabawić gości. Tak narodził się rap – z biedy, pasji i chęci bycia usłyszanym.</p>
-            </div>
-            <div style="background: #111; padding: 40px; border-radius: 20px; border: 1px solid #333;">
-                <h3 style="font-family: 'Bebas Neue'; color: var(--accent-color);">Hip-Hop to nie tylko rap!</h3>
-                <p>Pamiętaj, że Hip-Hop to cała kultura oparta na 4 fundamentach:</p>
-                <ul style="color: var(--text-gray);">
-                    <li><strong>DJing</strong> – Serce i rytm.</li>
-                    <li><strong>MCing</strong> – Słowo i przekaz.</li>
-                    <li><strong>B-boying</strong> – Taniec (Breakdance).</li>
-                    <li><strong>Graffiti</strong> – Sztuka wizualna.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="container">
+        <section class="history-box">
+            <h2>HISTORIA I GENEZA</h2>
+            <p>Hip-hop narodził się 11 sierpnia 1973 roku w południowym Bronksie podczas legendarnej imprezy DJ Kool Herca. To tam narodził się fundament tej kultury – zapętlanie instrumentalnych wstawek zwanych "breakami", które pozwalało tancerzom na dłuższą ekspresję. MC, czyli Mistrzowie Ceremonii, początkowo tylko zabawiali tłum, ale szybko zaczęli rymować o trudach życia, buncie i rzeczywistości ulicy. Rap stał się głosem ludzi spychanych na margines, zamieniając lokalne party w globalną rewolucję, która zmieniła oblicze nowoczesnej muzyki rozrywkowej.</p>
+            <p>W Polsce rap eksplodował w połowie lat 90. jako odpowiedź na szarą rzeczywistość blokowisk i transformację ustrojową. Pionierzy jak Molesta, Slums Attack czy Kaliber 44 przenieśli nowojorski brud na polski grunt, tworząc hymn pokolenia dorastającego w czasach wielkich zmian. Z czasem gatunek ten stał się najbardziej wpływowym nurtem w kraju, dominując listy przebojów i kształtując język ulicy. Mimo ewolucji brzmienia od surowych, samplowanych bitów po nowoczesny trap, fundamenty pozostały niezmienne: autentyczność, lojalność wobec korzeni i bezkompromisowy przekaz.</p>
+        </section>
 
-        <div class="section-title">4 Filary Kultury</div>
-        <div class="filary">
-            <div class="filar-card"><h3>BEAT</h3><p>Rytm, który daje życie.</p></div>
-            <div class="filar-card"><h3>RHYME</h3><p>Wiersze pisane na betonie.</p></div>
-            <div class="filar-card"><h3>DANCE</h3><p>Ekspresja w każdym ruchu.</p></div>
-            <div class="filar-card"><h3>ART</h3><p>Kolory na murach miast.</p></div>
-        </div>
-
-        <div class="section-title" id="muzyka">Złota Siódemka</div>
-        
         <div class="grid">
             <div class="card">
-                <span class="tag">RAP</span>
-                <h2>Grubson</h2>
-                <div class="quote-box">"Znowu jestem tam, gdzie słońce ma swój dom..."</div>
-                <p>Utwór "Na Szczycie" to hymn o nadziei, który przekroczył granice gatunków.</p>
-                <a href="https://www.youtube.com/watch?v=6BnT_wkuMBA" class="btn">SŁUCHAJ</a>
+                <span class="tag">Legenda</span>
+                <h2>Paktofonika - Jestem Bogiem</h2>
+                <div class="quote">"Uświadom to sobie sobie, ty też jesteś bogiem!"</div>
+                <a href="https://www.youtube.com/results?search_query=Paktofonika+Jestem+Bogiem" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
 
             <div class="card">
-                <span class="tag">RAP</span>
-                <h2>KęKę</h2>
-                <div class="quote-box">"Presja ma swoją cenę..."</div>
-                <p>Opowieść o walce z demonami i dorastaniu do bycia odpowiedzialnym mężczyzną.</p>
-                <a href="https://www.youtube.com/watch?v=kYI4N1p_f2o" class="btn">SŁUCHAJ</a>
+                <span class="tag">Klasyk</span>
+                <h2>Pezet - Ukryty w mieście krzyk</h2>
+                <div class="quote">"To miasto tętni, słyszysz ten dźwięk?"</div>
+                <a href="https://www.youtube.com/results?search_query=Pezet+Ukryty+w+mieście+krzyk" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
 
             <div class="card">
-                <span class="tag">RAP</span>
-                <h2>Zbuku</h2>
-                <div class="quote-box">"Idę do końca, dopóki starczy sił."</div>
-                <p>Mocny, motywacyjny przekaz dla każdego, kto ma przed sobą trudny cel.</p>
-                <a href="https://www.youtube.com/watch?v=wX8_pL5U-fM" class="btn">SŁUCHAJ</a>
+                <span class="tag">Poznań</span>
+                <h2>Paluch - Bez Strachu</h2>
+                <div class="quote">"Życie to walka, wybierasz swą stronę."</div>
+                <a href="https://www.youtube.com/results?search_query=Paluch+Bez+Strachu" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
 
             <div class="card">
-                <span class="tag">RAP</span>
-                <h2>Paluch</h2>
-                <div class="quote-box">"Bez strachu patrzę w jutro."</div>
-                <p>Definicja pewności siebie i szczerości prosto z poznańskich ulic.</p>
-                <a href="https://www.youtube.com/watch?v=En3yY8N4pEQ" class="btn">SŁUCHAJ</a>
-            </div>
-
-            <div class="card" style="border-top: 2px solid gold;">
-                <span class="tag" style="background: gold; color: black;">HIP-HOP KLASYK</span>
-                <h2>Paktofonika</h2>
-                <div class="quote-box">"Jestem Bogiem! Uświadom to sobie..."</div>
-                <p>Utwór, który zdefiniował filozofię polskiego hip-hopu początku lat 2000.</p>
-                <a href="http://www.youtube.com/watch?v=J4DyiwyEsa8" class="btn">SŁUCHAJ</a>
+                <span class="tag">Śląsk</span>
+                <h2>Grubson - Na Szczycie</h2>
+                <div class="quote">"Znowu jestem tam, gdzie słońce ma swój dom."</div>
+                <a href="https://www.youtube.com/results?search_query=Grubson+Na+Szczycie" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
 
             <div class="card">
-                <span class="tag">HIP-HOP</span>
-                <h2>Trzeci Wymiar</h2>
-                <div class="quote-box">"Dla mnie masz stajla, to nasza bajka."</div>
-                <p>Nieskazitelna technika i styl, który do dziś brzmi świeżo w głośnikach.</p>
-                <a href="https://www.youtube.com/watch?v=N4E7p1eY9_M" class="btn">SŁUCHAJ</a>
+                <span class="tag">Radom</span>
+                <h2>KęKę - Myśl</h2>
+                <div class="quote">"A u nas na dzielni bez zmian..."</div>
+                <a href="https://www.youtube.com/results?search_query=KęKę+Myśl" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
 
             <div class="card">
-                <span class="tag">HIP-HOP</span>
-                <h2>Jamal</h2>
-                <div class="quote-box">"Policeman przeszukuje mnie..."</div>
-                <p>Unikalne połączenie miejskiego klimatu z pozytywną energią dancehallu.</p>
-                <a href="https://www.youtube.com/watch?v=1F2l6Cbe7lM" class="btn">SŁUCHAJ</a>
+                <span class="tag">Motywacja</span>
+                <h2>ZBUKU - Do Końca</h2>
+                <div class="quote">"Idę do końca, dopóki starczy sił."</div>
+                <a href="https://www.youtube.com/results?search_query=ZBUKU+Do+Końca" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
+            </div>
+
+            <div class="card">
+                <span class="tag">Łódź</span>
+                <h2>O.S.T.R. - Tabasko</h2>
+                <div class="quote">"To jest ten moment, to jest ten styl!"</div>
+                <a href="https://www.youtube.com/results?search_query=OSTR+Tabasko" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
             </div>
         </div>
-
     </div>
 
     <footer>
-        <h2 style="font-family: 'Bebas Neue'; color: #333; margin-bottom: 10px;">HISTORIA PISANA RYTMEM</h2>
-        <p>Hip-Hop to nie to co robisz, Hip-Hop to to kim jesteś.</p>
-        <p style="font-size: 0.8rem; margin-top: 30px;">© 2026 KACPER.B I JAKUB.C</p>
+        <p style="color:#444; text-transform:uppercase; letter-spacing:2px; margin:0;">NIC TU NIE MA</p>
+        <div class="authors">Wykonane przez KACPER.B i JAKUB.C</div>
     </footer>
 
 </body>
